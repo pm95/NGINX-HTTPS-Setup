@@ -10,7 +10,8 @@ OS="$OSTYPE"
 DOMAIN="TEMP"
 SUB_DOMAIN="TEMP"
 TOP_LEVEL_DOMAIN="TEMP"
-CONFIG_FILE_LOCATION="Users//Desktop" # CHANGE ME AFTER DEBUGGING
+BASE_CONFIG_FILE_PATH="/Users/pietromalky/Desktop" # CHANGE ME AFTER DEBUGGING
+FULL_CONFIG_FILE_PATH="TEMP"
 
 
 # check what operating system user is running
@@ -35,4 +36,6 @@ echo "Your fully qualified domain is: " "$SUB_DOMAIN"."$DOMAIN"."$TOP_LEVEL_DOMA
 
 
 # copy config file to target location
-cp "[sub domain].[domain].[top level domain].conf" "$CONFIG_FILE_LOCATION/$SUB_DOMAIN.$DOMAIN.$TOP_LEVEL_DOMAIN.conf"
+FULL_CONFIG_FILE_PATH="$BASE_CONFIG_FILE_PATH/$SUB_DOMAIN.$DOMAIN.$TOP_LEVEL_DOMAIN.conf"
+cp "[sub domain].[domain].[top level domain].conf" $FULL_CONFIG_FILE_PATH
+echo "Created NGINX conf file at $FULL_CONFIG_FILE_PATH"
