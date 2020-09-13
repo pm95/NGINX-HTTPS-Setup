@@ -45,6 +45,8 @@ echo -e $'\n\e[36mYour full domain is: ' $'\e[33m' "$FULL_DOMAIN_NAME" $'\e[0m'
 # check nginx is installed on machine, if not, install it
 
 
+
+
 # copy config file to target location
 FULL_CONFIG_FILE_PATH="$BASE_CONFIG_FILE_PATH/$FULL_DOMAIN_NAME.conf"
 cp "[sub domain].[domain].[top level domain].conf" "$FULL_CONFIG_FILE_PATH"
