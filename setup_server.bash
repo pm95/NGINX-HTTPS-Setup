@@ -18,37 +18,39 @@ BASE_CONFIG_FILE_PATH="/Users/pietromalky/Desktop" # CHANGE ME AFTER DEBUGGING
 
 
 # read user input for domain, sub-domain and top-level-domain
-read -p "Enter your domain: " DOMAIN
-read -p "Enter your sub-domain: " SUB_DOMAIN
-read -p "Enter your top-level-domain: " TOP_LEVEL_DOMAIN
+read -p $'\e[36mEnter your domain (e.g. github): \e[0m' DOMAIN
+read -p $'\e[36mEnter your sub-domain (e.g. www): \e[0m' SUB_DOMAIN
+read -p $'\e[36mEnter your top-level-domain (e.g. com): \e[0m' TOP_LEVEL_DOMAIN
 FULL_DOMAIN_NAME="$SUB_DOMAIN.$DOMAIN.$TOP_LEVEL_DOMAIN"
 
 
 # echo domain back to user
-echo "Your fully qualified domain is: $FULL_DOMAIN_NAME" 
-
+yellow='\e[33m'
+nc='\e[0m'
+echo -e $'\n\e[36mYour full domain is: ' $'\e[33m' "$FULL_DOMAIN_NAME" $'\e[0m'
 
 # copy config file to target location
 FULL_CONFIG_FILE_PATH="$BASE_CONFIG_FILE_PATH/$FULL_DOMAIN_NAME.conf"
 cp "[sub domain].[domain].[top level domain].conf" "$FULL_CONFIG_FILE_PATH"
-echo "Created NGINX conf file at $FULL_CONFIG_FILE_PATH"
+echo -e $'\e[36mCreated NGINX conf file at: ' $'\e[33m' "$FULL_CONFIG_FILE_PATH" $'\e[0m'
+
 
 # add path where static files will be served from
-read -p  "Indicate the fully-qualified directory of your root static file directory to serve: " STATIC_FILE_DIR_PATH
+read -p $'\n\e[36mFull path to directory containing static files you want to serve: \e[0m' STATIC_FILE_DIR_PATH
+
 
 # modify config file to include server name based on user's OS
 if [[ "$OS" == "linux-gnu"* ]]; then
-    echo "Linux"
     sed -i "s/$SEARCH_STRING/$FULL_DOMAIN_NAME/g" "$FULL_CONFIG_FILE_PATH"
-    sed -i "s/_STATIFILEDIRECTORY_/$STATIC_FILE_DIR_PATH/g" "$FULL_CONFIG_FILE_PATH"
+    sed -i "s+_STATICFILEDIRECTORY_+$STATIC_FILE_DIR_PATH+g" "$FULL_CONFIG_FILE_PATH"
 elif [[ "$OS" == "darwin"* ]]; then
-    echo "MacOS"
     sed -i '' "s/$SEARCH_STRING/$FULL_DOMAIN_NAME/g" "$FULL_CONFIG_FILE_PATH"
-    sed -i '' "s/_STATIFILEDIRECTORY_/$STATIC_FILE_DIR_PATH/g" "$FULL_CONFIG_FILE_PATH"
+    sed -i '' "s+_STATICFILEDIRECTORY_+$STATIC_FILE_DIR_PATH+g" "$FULL_CONFIG_FILE_PATH"
 else
-    echo "Cannot run setup script on your OS: $OS. Exiting now"
+    echo -e $'\e[31mCannot run setup script on your OS:' "$FULL_CONFIG_FILE_PATH" $'. Exiting now\e[0m'
     exit 1
 fi
-echo "Modified config file to fit your domain"
+echo -e $'\n\e[36mCreated NGINX config file to fit your domain\e[0m'
+
 
 
