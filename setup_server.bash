@@ -5,6 +5,9 @@
 # Purpose: Help Linux and MacOS users setup NGINX HTTPS and proxy pass
 # read -p "Continue? (Y/N): " confirm && [[ $confirm == [yY] || $confirm == [yY][eE][sS] ]] || exit 1
 
+
+
+# ======== SETUP LOCAL VARIABLES ========
 # initial variable declarations
 OS="$OSTYPE"
 DOMAIN="TEMP"
@@ -16,7 +19,7 @@ SEARCH_STRING="_SUBDOMAIN_._DOMAIN_._TOPLEVELDOMAIN_"
 STATIC_FILE_DIR_PATH="TEMP"
 BASE_CONFIG_FILE_PATH="/Users/pietromalky/Desktop" # CHANGE ME AFTER DEBUGGING
 
-
+# ======== GET USER INPUT ========
 # read user input for domain, sub-domain and top-level-domain
 read -p $'\e[36mEnter your domain (e.g. github): \e[0m' DOMAIN
 read -p $'\e[36mEnter your sub-domain (e.g. www): \e[0m' SUB_DOMAIN
@@ -28,6 +31,19 @@ FULL_DOMAIN_NAME="$SUB_DOMAIN.$DOMAIN.$TOP_LEVEL_DOMAIN"
 yellow='\e[33m'
 nc='\e[0m'
 echo -e $'\n\e[36mYour full domain is: ' $'\e[33m' "$FULL_DOMAIN_NAME" $'\e[0m'
+
+
+
+
+# ======== CERTBOT CERTIFICATE CREATION HANDLING ========
+# check certbot is installed on machine, if not, install it
+
+
+
+
+# ======== NGINX CONFIG FILE HANDLING ========
+# check nginx is installed on machine, if not, install it
+
 
 # copy config file to target location
 FULL_CONFIG_FILE_PATH="$BASE_CONFIG_FILE_PATH/$FULL_DOMAIN_NAME.conf"
@@ -53,4 +69,12 @@ fi
 echo -e $'\n\e[36mCreated NGINX config file to fit your domain\e[0m'
 
 
+# ask user if they have API's they want to add to the proxy passthrough
 
+
+
+# ======== NGINX SERVER RUNNING HANDLING ========
+# kill all current processes on port 80
+
+
+# run NGINX server
