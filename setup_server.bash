@@ -19,6 +19,12 @@ SEARCH_STRING="_SUBDOMAIN_._DOMAIN_._TOPLEVELDOMAIN_"
 STATIC_FILE_DIR_PATH="TEMP"
 BASE_CONFIG_FILE_PATH="/etc/nginx/conf.d" # CHANGE ME AFTER DEBUGGING
 
+
+# ======== HANDLE KILLING EXISTING PROCESSES ON PORT 80 FIRST ========
+# sudo lsof -t -i tcp:80 -s tcp:listen | sudo xargs kill
+
+
+
 # ======== GET USER INPUT ========
 # read user input for domain, sub-domain and top-level-domain
 read -p $'\e[36mEnter your domain (e.g. github): \e[0m' DOMAIN
@@ -98,9 +104,3 @@ echo -e $'\n\e[36mCreated NGINX config file to fit your domain\e[0m'
 # ask user if they have API's they want to add to the proxy passthrough
 
 
-
-# ======== NGINX SERVER RUNNING HANDLING ========
-# kill all current processes on port 80
-
-
-# run NGINX server
