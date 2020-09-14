@@ -53,7 +53,7 @@ fi
 
 
 # # ======== CERTBOT CERTIFICATE CREATION HANDLING ========
-# # check certbot is installed on machine, if not, install it
+# check certbot is installed on machine, if not, warn user and quit
 CERTBOT_COUNT=`$PKG_QUERY | grep -i -c -w "certbot"`
 if [[ "$CERTBOT_COUNT" > 0 ]]; then 
     echo "Certbot is installed"
@@ -62,10 +62,13 @@ else
     exit 1
 fi
 
+# create ssl certificate with certbot
+sudo certbot certonly --standalone -d "$FULL_DOMAIN_NAME"
+echo "Created SSL certificate using Certbot and Let's Encrypt"
 
 
 # # ======== NGINX CONFIG FILE HANDLING ========
-# # check nginx is installed on machine, if not, install it
+# check nginx is installed on machine, if not, warn user and quit
 NGINX_COUNT=`$PKG_QUERY | grep -i -c -w "nginx"`
 if [[ "$NGINX_COUNT" > 0 ]]; then 
     echo "NGINX is installed"
