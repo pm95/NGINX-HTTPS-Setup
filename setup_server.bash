@@ -17,7 +17,7 @@ FULL_CONFIG_FILE_PATH="TEMP"
 FULL_DOMAIN_NAME="TEMP"
 SEARCH_STRING="_SUBDOMAIN_._DOMAIN_._TOPLEVELDOMAIN_"
 STATIC_FILE_DIR_PATH="TEMP"
-BASE_CONFIG_FILE_PATH="/etc/letsencrypt/live" # CHANGE ME AFTER DEBUGGING
+BASE_CONFIG_FILE_PATH="/etc/nginx/conf.d" # CHANGE ME AFTER DEBUGGING
 
 # ======== GET USER INPUT ========
 # read user input for domain, sub-domain and top-level-domain
