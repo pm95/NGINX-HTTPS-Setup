@@ -90,8 +90,8 @@ read -p $'\n\e[36mFull path to directory containing static files you want to ser
 
 
 # modify config file to include server name based on user's OS
-$SED "s/$SEARCH_STRING/$FULL_DOMAIN_NAME/g" "$FULL_CONFIG_FILE_PATH"
-$SED "s+_STATICFILEDIRECTORY_+$STATIC_FILE_DIR_PATH+g" "$FULL_CONFIG_FILE_PATH"
+sudo $SED "s/$SEARCH_STRING/$FULL_DOMAIN_NAME/g" "$FULL_CONFIG_FILE_PATH"
+sudo $SED "s+_STATICFILEDIRECTORY_+$STATIC_FILE_DIR_PATH+g" "$FULL_CONFIG_FILE_PATH"
 echo -e $'\n\e[36mCreated NGINX config file to fit your domain\e[0m'
 
 
