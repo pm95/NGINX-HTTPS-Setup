@@ -3,7 +3,6 @@
 # Author: Pietro Malky
 # Date: 09/13/2020
 # Purpose: Help Linux and MacOS users setup NGINX HTTPS and proxy pass
-# read -p "Continue? (Y/N): " confirm && [[ $confirm == [yY] || $confirm == [yY][eE][sS] ]] || exit 1
 
 
 
