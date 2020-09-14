@@ -81,7 +81,7 @@ fi
 
 # copy config file to target location
 FULL_CONFIG_FILE_PATH="$BASE_CONFIG_FILE_PATH/$FULL_DOMAIN_NAME.conf"
-cp "[sub domain].[domain].[top level domain].conf" "$FULL_CONFIG_FILE_PATH"
+sudo cp "[sub domain].[domain].[top level domain].conf" "$FULL_CONFIG_FILE_PATH"
 echo -e $'\e[36mCreated NGINX conf file at: ' $'\e[33m' "$FULL_CONFIG_FILE_PATH" $'\e[0m'
 
 
