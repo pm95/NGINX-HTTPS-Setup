@@ -26,11 +26,11 @@ BASE_CONFIG_FILE_PATH="/etc/nginx/conf.d" # CHANGE ME AFTER DEBUGGING
 
 # ======== GET USER INPUT ========
 # read user input for domain, sub-domain and top-level-domain
-read -p $'\e[36mEnter your domain (e.g. github): \e[0m' DOMAIN
-read -p $'\e[36mEnter your sub-domain (e.g. www): \e[0m' SUB_DOMAIN
-read -p $'\e[36mEnter your top-level-domain (e.g. com): \e[0m' TOP_LEVEL_DOMAIN
-FULL_DOMAIN_NAME="$SUB_DOMAIN.$DOMAIN.$TOP_LEVEL_DOMAIN"
-
+# read -p $'\e[36mEnter your domain (e.g. github): \e[0m' DOMAIN
+# read -p $'\e[36mEnter your sub-domain (e.g. www): \e[0m' SUB_DOMAIN
+# read -p $'\e[36mEnter your top-level-domain (e.g. com): \e[0m' TOP_LEVEL_DOMAIN
+# FULL_DOMAIN_NAME="$SUB_DOMAIN.$DOMAIN.$TOP_LEVEL_DOMAIN"
+read -p $'\e[36mEnter your full domain name (e.g. www.johnnyappleseed.com): \e[0m' FULL_DOMAIN_NAME
 
 # echo domain back to user
 yellow='\e[33m'
