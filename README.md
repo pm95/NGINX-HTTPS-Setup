@@ -2,7 +2,9 @@
 
 ## Before you begin
 
-- Ensure you have "sudo" access on your machine
+- Ensure you have "sudo" access on your machine.
+- Ensure you have a domain name registered and is working.
+- Ensure the server you'll use for HTTP/HTTPS traffic has ports 80 and 443 enabled and you're pointing to your domain name.
 
 ### Install Certbot and NGINX on your machine
 
@@ -35,15 +37,8 @@ sudo lsof -t -i tcp:80 -s tcp:listen | sudo xargs kill
 ./setup_server.bash
 ```
 
-The script will ask you to input your domain, sub-domain and top-level domain individually.
-
-e.g. If your full target domain is _blog.johnnyappleseed.com_, you'll be asked to input it as:
-
-```bash
-Enter your domain (e.g. github): johnnyappleseed
-Enter your sub-domain (e.g. www): blog
-Enter your top-level-domain (e.g. com): com
-```
+The script will ask you to input your entire domain.
+e.g. If your full target domain is _blog.johnnyappleseed.com_, you'll be asked to input it just like that.
 
 Follow the remaining of the steps prompted by the script.
 
@@ -74,9 +69,11 @@ Certbot uses Let's Encrypt as the C.A. (certificate authority) to manage your SS
 It will automatically create and manage your private key and full certificate at the following location:
 
 ```
+
 /etc/letsencrypt/live/[sub domain].[domain].[top level domain]/
-  |--- fullchain.pem
-  |--- privkey.pem
+|--- fullchain.pem
+|--- privkey.pem
+
 ```
 
 ## Additional notes
@@ -90,7 +87,9 @@ The base NGINX conf file was generated using [Mozilla's SSL Config tool](https:/
 
 ## Additional modifications
 
-If you wish to modify the NGINX config file, you can do so using your text editor of choice (VIM, NANO, EMACS, etc.)
+If you wish to modify the NGINX config file, you can do so using your text editor of choice (VIM, NANO, EMACS, etc.).
+
+You can add proxy redirects to your web APIs or WebSocket applications by modifying the NGINX config (conf) file generated. A template for both scenarios is already provided, simply un-comment the applicable blocks.
 
 ## Questions? Get in touch
 
