@@ -2,7 +2,7 @@
 
 # Author: Pietro Malky
 # Date: 09/13/2020
-# Purpose: Help Linux and MacOS users setup NGINX HTTPS and proxy pass
+# Purpose: Help Linux and MacOS users setup NGINX HTTPS and proxy pass for API calls
 
 
 
@@ -14,7 +14,7 @@ SUB_DOMAIN="TEMP"
 TOP_LEVEL_DOMAIN="TEMP"
 FULL_CONFIG_FILE_PATH="TEMP"
 FULL_DOMAIN_NAME="TEMP"
-SEARCH_STRING="_SUBDOMAIN_._DOMAIN_._TOPLEVELDOMAIN_"
+SEARCH_STRING="_SUBDOMAIN_._DOMAIN_._TOPLEVELDOMAIN_" # target string to replace in template config file, with user-specified domain
 STATIC_FILE_DIR_PATH="TEMP"
 BASE_CONFIG_FILE_PATH="/etc/nginx/conf.d" # CHANGE ME AFTER DEBUGGING
 
@@ -25,11 +25,7 @@ BASE_CONFIG_FILE_PATH="/etc/nginx/conf.d" # CHANGE ME AFTER DEBUGGING
 
 
 # ======== GET USER INPUT ========
-# read user input for domain, sub-domain and top-level-domain
-# read -p $'\e[36mEnter your domain (e.g. github): \e[0m' DOMAIN
-# read -p $'\e[36mEnter your sub-domain (e.g. www): \e[0m' SUB_DOMAIN
-# read -p $'\e[36mEnter your top-level-domain (e.g. com): \e[0m' TOP_LEVEL_DOMAIN
-# FULL_DOMAIN_NAME="$SUB_DOMAIN.$DOMAIN.$TOP_LEVEL_DOMAIN"
+# read user input for fully-qualified domain name
 read -p $'\e[36mEnter your full domain name (e.g. www.johnnyappleseed.com): \e[0m' FULL_DOMAIN_NAME
 
 # echo domain back to user
@@ -61,7 +57,7 @@ fi
 # check certbot is installed on machine, if not, warn user and quit
 CERTBOT_COUNT=`$PKG_QUERY | grep -i -c -w "certbot"`
 if [[ "$CERTBOT_COUNT" > 0 ]]; then 
-    echo "Certbot is installed"
+    echo "Certbot is installed. Continuing to check NGINX..."
 else    
     echo "Certbot is NOT installed"
     exit 1
@@ -76,7 +72,7 @@ echo "Created SSL certificate using Certbot and Let's Encrypt"
 # check nginx is installed on machine, if not, warn user and quit
 NGINX_COUNT=`$PKG_QUERY | grep -i -c -w "nginx"`
 if [[ "$NGINX_COUNT" > 0 ]]; then 
-    echo "NGINX is installed"
+    echo "NGINX is installed. Continuing with tool..."
 else    
     echo "NGINX is NOT installed"
     exit 1
@@ -98,8 +94,3 @@ read -p $'\n\e[36mFull path to directory containing static files you want to ser
 sudo $SED "s/$SEARCH_STRING/$FULL_DOMAIN_NAME/g" "$FULL_CONFIG_FILE_PATH"
 sudo $SED "s+_STATICFILEDIRECTORY_+$STATIC_FILE_DIR_PATH+g" "$FULL_CONFIG_FILE_PATH"
 echo -e $'\n\e[36mCreated NGINX config file to fit your domain\e[0m'
-
-
-# ask user if they have API's they want to add to the proxy passthrough
-
-

@@ -97,6 +97,37 @@ If you wish to modify the NGINX config file, you can do so using your text edito
 
 [LinkedIn](https://linkedin.com/in/pietro-malky)
 
+## Additional Notes
+
+### Steps to take to troubleshoot tool (use at your own risk)
+
+1. Purge (remove) NGINX and Certbot from your machine
+
+```bash
+sudo apt-get purge nginx nginx-common
+sudo apt-get purge certbot
+```
+
+2. Delete folders containing LetsEncrypt and NGINX data
+
+```bash
+sudo rm -rf /etc/letsencrypt/
+sudo rm -rf /etc/nginx/
+```
+
+3. Re-install NGINX and Certbot
+
+```bash
+sudo apt-get install certbot
+sudo apt-get install nginx
+```
+
+4. Navigate to NGINX HTTPS Setup directory and run tool
+
+```bash
+./setup_server.bash
+```
+
 <!-- - Obtain your certificate with Let's Encrypt and Certbot
   - sudo certbot certonly --standalone -d _SUBDOMAIN_._DOMAIN_._TOPLEVELDOMAIN_ -->
 <!-- # Generated with Mozilla's SSL configuration site
