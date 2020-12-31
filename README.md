@@ -9,6 +9,7 @@
 #### Ubuntu
 
 ```bash
+sudo apt-get update
 sudo apt-get install certbot
 sudo apt-get install nginx
 ```
@@ -101,9 +102,16 @@ If you wish to modify the NGINX config file, you can do so using your text edito
 
 ### Steps to take to troubleshoot tool (use at your own risk)
 
+0. Kill all processes on port 80 (http)
+
+```bash
+sudo lsof -t -i tcp:80 -s tcp:listen | sudo xargs kill
+```
+
 1. Purge (remove) NGINX and Certbot from your machine
 
 ```bash
+sudo apt-get update
 sudo apt-get purge nginx nginx-common
 sudo apt-get purge certbot
 ```

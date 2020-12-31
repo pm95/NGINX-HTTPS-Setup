@@ -20,7 +20,7 @@ BASE_CONFIG_FILE_PATH="/etc/nginx/conf.d" # CHANGE ME AFTER DEBUGGING
 
 
 # ======== HANDLE KILLING EXISTING PROCESSES ON PORT 80 FIRST ========
-# sudo lsof -t -i tcp:80 -s tcp:listen | sudo xargs kill
+sudo lsof -t -i tcp:80 -s tcp:listen | sudo xargs kill
 
 
 
